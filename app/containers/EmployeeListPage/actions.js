@@ -18,9 +18,10 @@ export function defaultAction() {
   };
 }
 
-export function setLoadingAction() {
+export function setLoadingAction(flag) {
   return {
     type: SET_LOADING_ACTION,
+    flag,
   };
 }
 
@@ -37,9 +38,9 @@ export function setEmployeeListAction(employees) {
   };
 }
 
-export function deleteEmployeeAction(idEmployee) {
+export function deleteEmployeeAction(idDelete) {
   return {
     type: DELETE_EMPLOYEE_ACTION,
-    idEmployee,
+    idDelete,
   };
 }

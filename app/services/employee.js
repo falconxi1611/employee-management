@@ -1,4 +1,4 @@
-import { API_PATH } from 'utils/constants';
+import { API_PATH } from '../utils/constants';
 import AxiosInstance from './axios';
 export default class EmployeeServices {
   /**

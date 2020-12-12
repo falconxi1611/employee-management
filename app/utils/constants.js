@@ -10,5 +10,5 @@ export const EMPLOYEE_FIELD = {
 };
 
 export const API_PATH = {
-  GET_EMPLOYEE: '/api/employees',
+  EMPLOYEES: '/api/employees',
 };

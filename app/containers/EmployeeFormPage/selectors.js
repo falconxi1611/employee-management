@@ -11,6 +11,17 @@ const selectEmployeeFormPageDomain = state =>
 /**
  * Other specific selectors
  */
+const makeSelectIsLoading = () =>
+  createSelector(
+    selectEmployeeFormPageDomain,
+    substate => substate.isLoading,
+  );
+
+const makeSelectEmployeeDetail = () =>
+  createSelector(
+    selectEmployeeFormPageDomain,
+    substate => substate.employeeDetail,
+  );
 
 /**
  * Default selector used by EmployeeFormPage
@@ -23,4 +34,8 @@ const makeSelectEmployeeFormPage = () =>
   );
 
 export default makeSelectEmployeeFormPage;
-export { selectEmployeeFormPageDomain };
+export {
+  selectEmployeeFormPageDomain,
+  makeSelectIsLoading,
+  makeSelectEmployeeDetail,
+};

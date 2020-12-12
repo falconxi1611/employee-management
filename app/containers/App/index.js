@@ -32,6 +32,7 @@ export default function App() {
         <Route exact path="/" render={() => <Redirect to="/employee/list" />} />
         <Route path="/employee/list" component={EmployeeListPage} />
         <Route path="/employee/add" component={EmployeeFormPage} />
+        <Route path="/employee/edit/:id" component={EmployeeFormPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

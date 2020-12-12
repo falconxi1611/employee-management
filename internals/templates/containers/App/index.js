@@ -8,9 +8,9 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
+import EmployeeListPage from 'containers/EmployeeListPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -19,7 +19,8 @@ export default function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" render={() => <Redirect to="/employee/list" />} />
+        <Route exact path="/" component={EmployeeListPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

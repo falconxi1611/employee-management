@@ -6,6 +6,7 @@ import {
   setEmployeeListAction,
   setLoadingAction,
 } from './actions';
+import { setDetailAction } from '../EmployeeFormPage/actions';
 
 function* getEmployeeListSaga() {
   const employeeServices = new EmployeeServices();
@@ -13,7 +14,8 @@ function* getEmployeeListSaga() {
   try {
     const res = yield call(employeeServices.getEmployees);
     if (res.status === 200) {
-      yield put(setEmployeeListAction(res.data));
+      yield put(setEmployeeListAction(res.data.employees));
+      yield put(setDetailAction({}));
     }
   } catch (err) {
     console.log(err);
@@ -27,9 +29,7 @@ function* deleteEmployeeSaga({ idDelete }) {
     const employeeServices = new EmployeeServices();
     yield put(setLoadingAction(true));
     const res = yield call(employeeServices.deleteEmployees, idDelete);
-    if (res.status === 200) {
-      yield put(getEmployeeListAction(res.data));
-    }
+    yield put(getEmployeeListAction(res.data));
   } catch (err) {
     console.log(err);
   } finally {
