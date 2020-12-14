@@ -36,7 +36,7 @@
 ### Built With
 
 - [React BoilerPlate](https://www.reactboilerplate.com/)
-- [Ant Design](hhttps://ant.design/docs/react/introduce)
+- [Ant Design](https://ant.design/docs/react/introduce)
 - [MigrateJS](https://www.npmjs.com/package/migrate-js)
 
 <!-- GETTING STARTED -->
@@ -47,7 +47,7 @@
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/othneildrew/Best-README-Template.git
+   git clone https://github.com/falconxi1611/employee-management.git
    ```
 2. Install NPM packages
    ```sh
