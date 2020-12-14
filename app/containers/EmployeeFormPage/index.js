@@ -75,11 +75,11 @@ export function EmployeeFormPage(props) {
     },
     {
       min: 6,
-      message: `Please input ${field}! Minimum 6 character and max 10 characters`,
+      message: `${field} must be minimum 6 characters and max 10 characters`,
     },
     {
       max: 10,
-      message: `Please input ${field}! Minimum 6 character and max 10 characters`,
+      message: `${field} must be minimum 6 character and max 10 characters`,
     },
   ];
 
@@ -105,7 +105,7 @@ export function EmployeeFormPage(props) {
                 <a href="/employee/list">List</a>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <a href="">Add new employee</a>
+                <a href="">Form employee</a>
               </Breadcrumb.Item>
             </Breadcrumb>
           </div>
