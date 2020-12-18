@@ -57,6 +57,7 @@ export function EmployeeListPage(props) {
     {
       title: 'First name',
       dataIndex: EMPLOYEE_FIELD.FIRST_NAME,
+      className: 'tets',
     },
     {
       title: 'Last name',
@@ -82,9 +83,10 @@ export function EmployeeListPage(props) {
           <Link to={`/employee/edit/${record.id}`}>
             <EditTwoTone style={styleAction} />
           </Link>
-          <a onClick={() => handleClickDelete(record.id)}>
-            <DeleteTwoTone style={styleAction} />
-          </a>
+          <DeleteTwoTone
+            style={styleAction}
+            onClick={() => handleClickDelete(record.id)}
+          />
         </Space>
       ),
     },

@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { notification } from 'antd';
 import EmployeeServices from '../../services/employee';
 import {
   GET_DETAIL_ACTION,
@@ -13,7 +14,6 @@ function* getDetailSaga({ idEmployee }) {
   try {
     const res = yield call(employeeServices.getEmployeeDetail, idEmployee);
     if (res.status === 200) {
-      yield put(setLoadingAction(false));
       yield put(setDetailAction(res.data.employee));
     }
   } catch (err) {
@@ -21,24 +21,30 @@ function* getDetailSaga({ idEmployee }) {
   } finally {
     yield put(setLoadingAction(false));
   }
+  return true;
 }
 
-function* addEmployeeSaga({ employee }) {
+function* addEmployeeSaga({ employee, history }) {
   const employeeServices = new EmployeeServices();
   yield put(setLoadingAction(true));
   try {
     const res = yield call(employeeServices.addEmployees, employee);
-    if (res.status === 200) {
-      yield put(setLoadingAction(false));
+    if (res.status === 201) {
+      notification.success({
+        message: 'Add employee success !',
+      });
+      history.push('/employee/list');
     }
   } catch (err) {
-    console.log(err);
+    notification.error({
+      message: 'Can not insert employee !',
+    });
   } finally {
     yield put(setLoadingAction(false));
   }
 }
 
-function* editEmployeeSaga({ idEmployee, employee }) {
+function* editEmployeeSaga({ idEmployee, employee, history }) {
   const employeeServices = new EmployeeServices();
   yield put(setLoadingAction(true));
   try {
@@ -48,10 +54,15 @@ function* editEmployeeSaga({ idEmployee, employee }) {
       employee,
     );
     if (res.status === 200) {
-      yield put(setLoadingAction(false));
+      notification.success({
+        message: 'Update employee success !',
+      });
+      history.push('/employee/list');
     }
   } catch (err) {
-    console.log(err);
+    notification.error({
+      message: 'Can not update employee !',
+    });
   } finally {
     yield put(setLoadingAction(false));
   }

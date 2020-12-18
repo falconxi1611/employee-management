@@ -1,6 +1,13 @@
 import { createServer, Model } from 'miragejs';
 import { EMPLOYEE_FIELD } from 'utils/constants';
+/*
+  By default, Mirage sets the HTTP status code of a response based on the verb being used for the route:
 
+  GET is 200
+  PATCH/PUT is 204
+  POST is 201
+  DEL is 204
+*/
 export default function() {
   createServer({
     models: {

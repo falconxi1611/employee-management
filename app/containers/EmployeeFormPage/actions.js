@@ -40,17 +40,19 @@ export function setDetailAction(employeeDetail) {
   };
 }
 
-export function addEmployeeAction(employee) {
+export function addEmployeeAction(employee, history) {
   return {
     type: ADD_EMPLOYEE_ACTION,
     employee,
+    history,
   };
 }
 
-export function editEmployeeAction(idEmployee, employee) {
+export function editEmployeeAction(idEmployee, employee, history) {
   return {
     type: EDIT_EMPLOYEE_ACTION,
     idEmployee,
     employee,
+    history,
   };
 }

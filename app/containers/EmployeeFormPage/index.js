@@ -7,13 +7,15 @@
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Spin, Form, Input, Typography, Button, Radio, Breadcrumb } from 'antd';
+import { Spin, Form, Typography, Button, Radio, Breadcrumb } from 'antd';
+import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { Prompt } from 'react-router';
 import { compose } from 'redux';
 import { EMPLOYEE_FIELD } from 'utils/constants';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import Textbox from '../../components/Textbox';
 import makeSelectEmployeeFormPage, {
   makeSelectIsLoading,
   makeSelectEmployeeDetail,
@@ -58,14 +60,13 @@ export function EmployeeFormPage(props) {
     }
   }, [employeeDetail]);
 
-  const onFinish = values => {
+  const onFinish = async valuesForm => {
     if (idDetail) {
-      editEmployee(idDetail, values);
+      await editEmployee(idDetail, valuesForm, history);
     } else {
-      addEmployee(values);
+      await addEmployee(valuesForm, history);
     }
     setChangeForm(false);
-    history.push('/employee/list');
   };
 
   const ruleOfName = field => [
@@ -100,13 +101,10 @@ export function EmployeeFormPage(props) {
           <Title className="employee-form-title">Employee Form</Title>
           <div className="bread-crumb">
             <Breadcrumb>
-              <Breadcrumb.Item>Employee</Breadcrumb.Item>
               <Breadcrumb.Item>
-                <a href="/employee/list">List</a>
+                <Link to="/employee/list">Employee List</Link>
               </Breadcrumb.Item>
-              <Breadcrumb.Item>
-                <a href="">Form employee</a>
-              </Breadcrumb.Item>
+              <Breadcrumb.Item>Form employee</Breadcrumb.Item>
             </Breadcrumb>
           </div>
           <Form
@@ -117,21 +115,17 @@ export function EmployeeFormPage(props) {
             layout="vertical"
             onFieldsChange={handleFieldChange}
           >
-            <Form.Item
+            <Textbox
               name={EMPLOYEE_FIELD.FIRST_NAME}
               label="First Name"
               rules={ruleOfName('First Name')}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
+            />
+            <Textbox
               name={EMPLOYEE_FIELD.LAST_NAME}
               label="Last Name"
               rules={ruleOfName('Last Name')}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
+            />
+            <Textbox
               name={EMPLOYEE_FIELD.EMAIL_ADDRESS}
               label="E-mail"
               rules={[
@@ -144,10 +138,8 @@ export function EmployeeFormPage(props) {
                   message: 'Please input your E-mail!',
                 },
               ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
+            />
+            <Textbox
               name={EMPLOYEE_FIELD.PHONE_NUMBER}
               label="Phone"
               rules={[
@@ -158,9 +150,7 @@ export function EmployeeFormPage(props) {
                   ),
                 },
               ]}
-            >
-              <Input />
-            </Form.Item>
+            />
             <Form.Item name={EMPLOYEE_FIELD.GENDER} label="Gender">
               <Radio.Group>
                 <Radio value="Male">Male</Radio>
@@ -206,9 +196,10 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     getDetailEmployee: idEmployee => dispatch(getDetailAction(idEmployee)),
-    addEmployee: employee => dispatch(addEmployeeAction(employee)),
-    editEmployee: (idEmployee, employee) =>
-      dispatch(editEmployeeAction(idEmployee, employee)),
+    addEmployee: (employee, history) =>
+      dispatch(addEmployeeAction(employee, history)),
+    editEmployee: (idEmployee, employee, history) =>
+      dispatch(editEmployeeAction(idEmployee, employee, history)),
   };
 }
 

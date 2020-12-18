@@ -65,6 +65,9 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.4.3",
+    "@emotion/css": "^11.0.0",
+    "@emotion/react": "^11.1.2",
+    "@emotion/styled": "^11.0.0",
     "antd": "^4.9.2",
     "axios": "^0.21.0",
     "chalk": "2.4.2",

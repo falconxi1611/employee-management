@@ -1,4 +1,5 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { notification } from 'antd';
 import EmployeeServices from '../../services/employee';
 import { DELETE_EMPLOYEE_ACTION, GET_EMPLOYEE_LIST_ACTION } from './constants';
 import {
@@ -30,8 +31,15 @@ function* deleteEmployeeSaga({ idDelete }) {
     yield put(setLoadingAction(true));
     const res = yield call(employeeServices.deleteEmployees, idDelete);
     yield put(getEmployeeListAction(res.data));
+    if (res.status === 204) {
+      notification.success({
+        message: 'Delete employee success !',
+      });
+    }
   } catch (err) {
-    console.log(err);
+    notification.error({
+      message: 'Can not delete employee !',
+    });
   } finally {
     yield put(setLoadingAction(false));
   }

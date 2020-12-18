@@ -38,11 +38,10 @@ export default class EmployeeServices {
    * @param {object} body Employee object
    *
    */
-  updateEmployees = (idUpdate, params) => {
+  updateEmployees = (idUpdate, params) =>
     AxiosInstance.put(`${API_PATH.EMPLOYEES}/${idUpdate}`, params)
       .then(res => res)
       .catch(err => err.response || err);
-  };
 
   /*
    * Delete employee
