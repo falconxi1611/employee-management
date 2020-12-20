@@ -9,4 +9,21 @@
     text-align: end;
     padding-bottom: 20px;
   }
+
+  .table-employees {
+    .ant-table {
+      .ant-table-thead {
+        .ant-table-cell {
+          font-weight: 700;
+          background-color: cornflowerblue;
+          color: #fff;
+        }
+      }
+      .ant-table-tbody {
+        .ant-table-row:nth-child(2n) {
+          background-color: #faf9f3;
+        }
+      }
+    }
+  }
 }

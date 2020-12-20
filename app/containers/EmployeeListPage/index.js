@@ -100,7 +100,13 @@ export function EmployeeListPage(props) {
           <Button type="primary">Add</Button>
         </Link>
       </div>
-      <Table loading={isLoading} columns={columns} dataSource={employeeList} />
+      <Table
+        loading={isLoading}
+        bordered
+        columns={columns}
+        dataSource={employeeList}
+        className="table-employees"
+      />
     </div>
   );
 }

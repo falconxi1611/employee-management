@@ -7,7 +7,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Spin, Form, Typography, Button, Radio, Breadcrumb } from 'antd';
+import { Spin, Form, Typography, Button, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { Prompt } from 'react-router';
@@ -16,6 +16,7 @@ import { EMPLOYEE_FIELD } from 'utils/constants';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import Textbox from '../../components/Textbox';
+import RadioButton from '../../components/RadioButton';
 import makeSelectEmployeeFormPage, {
   makeSelectIsLoading,
   makeSelectEmployeeDetail,
@@ -30,6 +31,16 @@ import saga from './saga';
 import './style.scss';
 
 const { Title } = Typography;
+const ARRAY_GENDER = [
+  {
+    key: 'Male',
+    value: 'Male',
+  },
+  {
+    key: 'Female',
+    value: 'Female',
+  },
+];
 export function EmployeeFormPage(props) {
   const {
     history,
@@ -85,7 +96,7 @@ export function EmployeeFormPage(props) {
   ];
 
   const handleFieldChange = changedFields => {
-    if (changedFields) {
+    if (changedFields && idDetail) {
       setChangeForm(true);
     }
   };
@@ -151,12 +162,11 @@ export function EmployeeFormPage(props) {
                 },
               ]}
             />
-            <Form.Item name={EMPLOYEE_FIELD.GENDER} label="Gender">
-              <Radio.Group>
-                <Radio value="Male">Male</Radio>
-                <Radio value="Female">Female</Radio>
-              </Radio.Group>
-            </Form.Item>
+            <RadioButton
+              name={EMPLOYEE_FIELD.GENDER}
+              label="Gender"
+              arrValue={ARRAY_GENDER}
+            />
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
